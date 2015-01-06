@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>百度新闻搜索</title>
+	<style>
+	#imgplayer 
+	{
+		height: 305px;
+		width: 560px;
+		padding-top: 10px;
+		position: relative;
+		right: 0;
+		top: 0;
+		border: 0;
+		margin: 0 auto;
+	}
+	.imgplayerinner
+	{
+		margin: 0;
+		padding: 0;
+	}
+	ul
+	{
+		margin: 0;
+		padding: 0;
+		border: 0;
+
+	}
+	img
+	{
+		margin: 0;
+		width: 560px;
+		height: 305px;
+	}
+
+	ul,li 
+	{
+		list-style: none;
+	}
+	a
+	{
+		text-decoration: none;
+	}
+	#arrow-left
+	{
+		position: absolute;
+		left: 10px;
+		width: 45px;
+		height: 45px;
+		opacity: 0.5;
+		top: 130px;
+		overflow: hidden;
+		line-height: 10;
+		background: url(images/other.png) no-repeat left top;
+	}
+	#arrow-left:hover, #arrow-right:hover
+	{
+		opacity: 0.8;
+	}
+	#arrow-right
+	{
+		right: 10px;
+		background: url(images/other.png) no-repeat left -45px;
+		position: absolute;
+        width: 45px;
+		height: 45px;
+		opacity: 0.5;
+		top: 130px;
+		overflow: hidden;
+		line-height: 10;
+	}
+
+	#imgnav
+	{
+		position: absolute;
+		height: 12px;
+		width: 100px;
+		right: 0;
+		bottom: 13px;
+		overflow: hidden;
+	}
+	#imgnav li a
+	{
+		float: left;
+		height: 12px;
+		width: 8px;
+		margin-right: 5px;
+		background: url(images/other.png) 20px -126px;
+		overflow: hidden;
+		line-height: 10;
+	}
+    #imgnav li.selected a
+	{
+		background: url(images/other.png) 35px -126px;
+		width: 12px;
+	}
+	#image{
+		margin:0;
+		padding:0;
+	}
+	#imagenav{
+		margin:0;
+		padding:0;
+	}
+	#image li{
+		display: none;
+	}
+	#image li.found{
+		display: block;
+	}
+	</style>
+
+	</head>
+
+
+<body onload="autoTabStart()">
+	<div id="imgplayer">
+		<div class="imgplayerinner">
+			<div class="arrow">
+				<i onclick="move(true)" id="arrow-right"></i>
+				<i onclick="move(false)" id="arrow-left"></i>
+			</div>
+			<ul id="image">
+				<li class="found">
+					<a href="" target="_blank">
+						<img src="images/1.jpg">
+					</a>
+				</li>
+				<li>
+					<a href="" target="_blank">
+						<img src="images/2.jpg">
+					</a>
+				</li>
+				<li>
+					<a href="" target="_blank">
+						<img src="images/3.jpg">
+					</a>
+				</li>
+				<li>
+					<a href="" target="_blank">
+						<img src="images/4.jpg">
+					</a>
+				</li>
+				<li>
+					<a href="" target="_blank">
+						<img src="images/5.jpg">
+					</a>
+				</li>
+				<li>
+					<a href="" target="_blank">
+						<img src="images/6.jpg">
+					</a>
+				</li>
+				<li>
+					<a href="" target="_blank">
+						<img src="images/7.jpg">
+					</a>
+				</li>
+				<li>
+					<a href="" target="_blank">
+						<img src="images/8.jpg">
+					</a>
+				</li>
+
+			</ul>
+			<div id="imgnav">
+				<ul id="imagenav">
+					<li class="selected"><a href="javascript:;"></a></li>
+					<li><a href="javascript:;"></a></li>
+					<li><a href="javascript:;"></a></li>
+					<li><a href="javascript:;"></a></li>
+					<li><a href="javascript:;"></a></li>
+					<li><a href="javascript:;"></a></li>
+					<li><a href="javascript:;"></a></li>
+					<li><a href="javascript:;"></a></li>
+				</ul>
+			</div>
+		</div>
+
+
+
+	</div>
+
+	<script type="text/javascript">
+	var imgs=document.getElementById('image').getElementsByTagName('li');
+	var navs=document.getElementById('imagenav').getElementsByTagName('li');
+	var index;
+	var getcurindex=function(){
+    for (var i = 0; i < navs.length; i++) {
+      if (navs[i].className.indexOf('selected')!=-1) {
+          return i;
+        }
+      }
+    }
+	//alert(getcurindex());
+	
+	var move=function(flag){
+		index=getcurindex();
+		if(flag){
+			index++;
+			if(index>=imgs.length){
+				index=0;
+			}
+		}
+		else{
+			index--;
+			if (index<=0) {
+				index=imgs.length-1;
+			}	
+		}
+	    show(index);
+	}
+	var show=function(index){
+		for (var i = 0; i < imgs.length; i++) {
+			if(i==index){
+				imgs[index].style.display="block";
+				navs[index].className="selected";
+			}
+			else{
+				imgs[i].style.display="none";
+				navs[i].className="";
+			}
+		}
+	}
+
+
+
+
+	var autoTabStart = function(){
+    	focusTimeHandler = setInterval(function(){move(true);},2000);
+    }
+ 
+	</script>
+</body>
+
+
+</html>
